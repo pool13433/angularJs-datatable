@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="appplication">
+    <head>
+        <title>AngularJs</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+
+        <link rel="stylesheet" href="vendor/datatables/media/css/dataTables.bootstrap.min.css">
+        <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
+    </head>
+    <body ng-controller="datatableCtrl">
+        <div class="container" style="margin-top: 50px;">
+            <table id="foobar" class="table table-bordered table-striped" datatable="" dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance"></table>
+        </div>
+
+        <script src="vendor/jquery/dist/jquery.js"></script>
+        <script src="vendor/datatables/media/js/jquery.dataTables.min.js"></script>        
+        <script src="vendor/angular/angular.min.js"></script>      
+        <script src="dist/angular-datatables.min.js"></script>       
+        <script src="dist/plugins/bootstrap/angular-datatables.bootstrap.min.js"></script>
+        <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript">
+                "use strict";
+
+                var app = angular.module('appplication', ['datatables', 'datatables.bootstrap']);
+                app.controller('datatableCtrl', function ($scope, DTOptionsBuilder, DTColumnBuilder) {
+                    var json = [
+                        {'name': 'poolsawat', 'age': 99},
+                        {'name': 'poolsawat', 'age': 99},
+                        {'name': 'poolsawat', 'age': 99},
+                        {'name': 'poolsawat', 'age': 99},
+                        {'name': 'poolsawat', 'age': 99},
+                    ]
+                    var vm = $scope;
+                    vm.dtOptions = DTOptionsBuilder
+                            .fromSource('data.json')
+                            // Add Bootstrap compatibility
+                            .withBootstrap();
+                    vm.dtColumns = [
+                        DTColumnBuilder.newColumn('id').withTitle('ID').withClass('text-danger'),
+                        DTColumnBuilder.newColumn('firstName').withTitle('First name'),
+                        DTColumnBuilder.newColumn('lastName').withTitle('Last name')
+                    ];
+                });
+
+        </script>
+    </body>
+</html>
